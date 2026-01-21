@@ -1,6 +1,6 @@
 ## Screenshots
 
-### Dashboard
+### Login
 ![Login](screenshots/login.png)
 
 ### Dashboard
