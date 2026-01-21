@@ -1,0 +1,141 @@
+<div class="reports-container">
+  <h2>📊 Financial Reports</h2>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <h3>Report Filters</h3>
+    
+    <div class="filter-grid">
+      <div class="filter-group">
+        <label>Property</label>
+        <select [(ngModel)]="filter.propertyId" (change)="onPropertyChange()">
+          <option [value]="null">All Properties</option>
+          <option *ngFor="let property of properties" [value]="property.id">
+            {{ property.name }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Period Type</label>
+        <select [(ngModel)]="filter.period" (change)="onPeriodChange()">
+          <option value="month">Monthly</option>
+          <option value="quarter">Quarterly</option>
+          <option value="year">Yearly</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Year</label>
+        <select [(ngModel)]="filter.year">
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+      
+      <div class="filter-group" *ngIf="filter.period === 'month'">
+        <label>Month</label>
+        <select [(ngModel)]="filter.month">
+          <option *ngFor="let month of months" [value]="month.value">
+            {{ month.label }}
+          </option>
+        </select>
+      </div>
+      
+      <div class="filter-group" *ngIf="filter.period === 'quarter'">
+        <label>Quarter</label>
+        <select [(ngModel)]="filter.quarter">
+          <option *ngFor="let quarter of quarters" [value]="quarter.value">
+            {{ quarter.label }}
+          </option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="filter-actions">
+      <button class="btn btn-primary" (click)="generateReport()">
+        📄 Generate Report
+      </button>
+      <button class="btn btn-success" (click)="exportReport()" [disabled]="!report">
+        💾 Export to CSV
+      </button>
+    </div>
+  </div>
+
+  <!-- Report Summary -->
+  <div class="report-section" *ngIf="report">
+    <div class="report-header">
+      <h3>Financial Summary</h3>
+      <div class="report-info">
+        <p><strong>Property:</strong> {{ getPropertyName() }}</p>
+        <p><strong>Period:</strong> {{ getPeriodLabel() }}</p>
+        <p><strong>Generated:</strong> {{ report.period }}</p>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="summary-card income">
+        <div class="card-icon">💵</div>
+        <h4>Total Income</h4>
+        <p class="amount">₹{{ report.totalIncome | number:'1.2-2' }}</p>
+      </div>
+      
+      <div class="summary-card expense">
+        <div class="card-icon">💸</div>
+        <h4>Total Expense</h4>
+        <p class="amount">₹{{ report.totalExpense | number:'1.2-2' }}</p>
+      </div>
+      
+      <div class="summary-card profit" [class.negative]="report.netProfit < 0">
+        <div class="card-icon">📊</div>
+        <h4>Net Profit</h4>
+        <p class="amount">₹{{ report.netProfit | number:'1.2-2' }}</p>
+      </div>
+    </div>
+
+    <!-- Transaction Details -->
+    <div class="transaction-details">
+      <h4>📝 Transaction Details ({{ report.transactions.length }} transactions)</h4>
+      
+      <div class="no-data" *ngIf="report.transactions.length === 0">
+        <p>No transactions found for the selected period</p>
+      </div>
+      
+      <table *ngIf="report.transactions.length > 0">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let transaction of report.transactions">
+            <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
+            <td>
+              <span class="badge" 
+                    [class.badge-income]="transaction.type === 'income'"
+                    [class.badge-expense]="transaction.type === 'expense'">
+                {{ transaction.type | titlecase }}
+              </span>
+            </td>
+            <td>{{ transaction.category }}</td>
+            <td class="amount" 
+                [class.income-text]="transaction.type === 'income'"
+                [class.expense-text]="transaction.type === 'expense'">
+              ₹{{ transaction.amount | number:'1.2-2' }}
+            </td>
+            <td>{{ transaction.notes || '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- No Report Message -->
+  <div class="no-report" *ngIf="!report">
+    <p>📄 Select filters and click "Generate Report" to view financial summary</p>
+  </div>
+</div>

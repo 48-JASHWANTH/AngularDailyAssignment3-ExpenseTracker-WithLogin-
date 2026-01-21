@@ -1,0 +1,53 @@
+.properties-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.property-selector {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.property-button {
+  padding: 12px 24px;
+  border: 2px solid #2563eb;
+  background-color: white;
+  color: #2563eb;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.property-button:hover {
+  background-color: #dbeafe;
+}
+
+.property-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.selected-info {
+  padding: 15px;
+  background-color: #f0f9ff;
+  border-left: 4px solid #2563eb;
+  border-radius: 4px;
+}
+
+.selected-info p {
+  margin: 0;
+  color: #555;
+}
+
+.selected-info strong {
+  color: #2563eb;
+}

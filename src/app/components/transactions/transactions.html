@@ -1,0 +1,153 @@
+<div class="transactions-container">
+  <h2>Transaction Management</h2>
+  
+  <div class="property-info" *ngIf="selectedProperty">
+    <p>Managing transactions for: <strong>{{ selectedProperty.name }}</strong></p>
+  </div>
+  
+  <div class="warning" *ngIf="!selectedProperty">
+    <p>⚠️ Please select a property to manage transactions</p>
+  </div>
+
+  <!-- Transaction Form -->
+  <div class="transaction-form" *ngIf="selectedProperty">
+    <h3>{{ editMode ? 'Edit Transaction' : 'Add New Transaction' }}</h3>
+    
+    <form (ngSubmit)="editMode ? updateTransaction() : addTransaction()">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Type</label>
+          <select [(ngModel)]="transactionForm.type" name="type" required>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Category</label>
+          <select [(ngModel)]="transactionForm.category" name="category" required>
+            <option value="">Select Category</option>
+            <option *ngFor="let cat of currentCategories" [value]="cat">{{ cat }}</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="number" [(ngModel)]="transactionForm.amount" name="amount" min="0" step="0.01" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" [(ngModel)]="transactionForm.date" name="date" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea [(ngModel)]="transactionForm.notes" name="notes" rows="2"></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          {{ editMode ? 'Update' : 'Add' }} Transaction
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()" *ngIf="editMode">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters" *ngIf="selectedProperty">
+    <h3>Filter Transactions</h3>
+    
+    <div class="filter-row">
+      <div class="filter-group">
+        <label>Type</label>
+        <select [(ngModel)]="filterType" (change)="onFilterChange()">
+          <option value="all">All</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label>Start Date</label>
+        <input type="date" [(ngModel)]="filterStartDate" (change)="onDateFilterChange()">
+      </div>
+      
+      <div class="filter-group">
+        <label>End Date</label>
+        <input type="date" [(ngModel)]="filterEndDate" (change)="onDateFilterChange()">
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-cards" *ngIf="selectedProperty && filteredTransactions.length > 0">
+    <div class="summary-card income">
+      <h4>Total Income</h4>
+      <p class="amount">₹{{ getTotalIncome() | number:'1.2-2' }}</p>
+    </div>
+    
+    <div class="summary-card expense">
+      <h4>Total Expense</h4>
+      <p class="amount">₹{{ getTotalExpense() | number:'1.2-2' }}</p>
+    </div>
+    
+    <div class="summary-card profit" [class.negative]="getNetProfit() < 0">
+      <h4>Net Profit</h4>
+      <p class="amount">₹{{ getNetProfit() | number:'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <!-- Transaction List -->
+  <div class="transaction-list" *ngIf="selectedProperty">
+    <h3>Transactions ({{ filteredTransactions.length }})</h3>
+    
+    <div class="no-data" *ngIf="filteredTransactions.length === 0">
+      <p>No transactions found</p>
+    </div>
+    
+    <table *ngIf="filteredTransactions.length > 0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of filteredTransactions">
+          <td>{{ transaction.date | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <span class="badge" [class.badge-income]="transaction.type === 'income'" 
+                  [class.badge-expense]="transaction.type === 'expense'">
+              {{ transaction.type | titlecase }}
+            </span>
+          </td>
+          <td>{{ transaction.category }}</td>
+          <td class="amount" [class.income-text]="transaction.type === 'income'" 
+              [class.expense-text]="transaction.type === 'expense'">
+            ₹{{ transaction.amount | number:'1.2-2' }}
+          </td>
+          <td>{{ transaction.notes || '-' }}</td>
+          <td class="actions">
+            <button class="btn-icon btn-edit" (click)="editTransaction(transaction)" title="Edit">
+              ✏️
+            </button>
+            <button class="btn-icon btn-delete" (click)="deleteTransaction(transaction.id)" title="Delete">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

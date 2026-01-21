@@ -1,0 +1,84 @@
+<div class="dashboard-container">
+  <h2>Financial Dashboard - {{ propertyName }}</h2>
+  
+  <div class="loading" *ngIf="loading">
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="summary-section" *ngIf="!loading">
+    <div class="summary-card income">
+      <div class="card-icon">💰</div>
+      <h3>Total Income</h3>
+      <p class="amount">₹{{ summary.totalIncome | number:'1.2-2' }}</p>
+    </div>
+    
+    <div class="summary-card expense">
+      <div class="card-icon">📈</div>
+      <h3>Total Expense</h3>
+      <p class="amount">₹{{ summary.totalExpense | number:'1.2-2' }}</p>
+    </div>
+    
+    <div class="summary-card profit" [class.negative]="summary.netProfit < 0">
+      <div class="card-icon">📉</div>
+      <h3>Net Profit</h3>
+      <p class="amount">₹{{ summary.netProfit | number:'1.2-2' }}</p>
+    </div>
+  </div>
+
+  <!-- Cash Flow Chart -->
+  <div class="chart-section" *ngIf="!loading">
+    <div class="chart-header">
+      <h3>📈 Cash Flow Analysis</h3>
+      <div class="period-selector">
+        <label>Period:</label>
+        <select [(ngModel)]="cashflowPeriod" (change)="onPeriodChange()">
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="chart-container">
+      <canvas #cashflowCanvas width="800" height="400"></canvas>
+    </div>
+  </div>
+
+  <!-- Expense Breakdown Chart -->
+  <div class="chart-section" *ngIf="!loading && categoryExpenses.length > 0">
+    <div class="chart-header">
+      <h3>🥧 Expense Breakdown by Category</h3>
+    </div>
+    
+    <div class="chart-container">
+      <canvas #expenseCanvas width="600" height="400"></canvas>
+    </div>
+    
+    <div class="category-list">
+      <h4>Category Details</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cat of categoryExpenses">
+            <td>{{ cat.category }}</td>
+            <td>₹{{ cat.amount | number:'1.2-2' }}</td>
+            <td>{{ (cat.amount / summary.totalExpense * 100) | number:'1.1-1' }}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- No Data Message -->
+  <div class="no-data" *ngIf="!loading && transactions.length === 0">
+    <p>📄 No transaction data available for {{ propertyName }}</p>
+    <p>Add transactions to see financial insights</p>
+  </div>
+</div>

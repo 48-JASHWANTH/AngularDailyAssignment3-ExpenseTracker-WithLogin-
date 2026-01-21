@@ -1,0 +1,24 @@
+<div class="app-container">
+  @if (authService.isAuthenticated()) {
+    <header class="app-header">
+      <h1>{{ title() }}</h1>
+      <nav class="main-nav">
+        <a routerLink="/dashboard" routerLinkActive="active">📊 Dashboard</a>
+        <a routerLink="/properties" routerLinkActive="active">🏠 Properties</a>
+        <a routerLink="/transactions" routerLinkActive="active">💰 Transactions</a>
+        <a routerLink="/reports" routerLinkActive="active">📈 Reports</a>
+        <button class="logout-btn" (click)="logout()">🚪 Logout</button>
+      </nav>
+    </header>
+  }
+  
+  <main class="app-main">
+    <router-outlet></router-outlet>
+  </main>
+  
+  @if (authService.isAuthenticated()) {
+    <footer class="app-footer">
+      <p>&copy; 2026 XYZ Company - Integrated Financial Management System</p>
+    </footer>
+  }
+</div>

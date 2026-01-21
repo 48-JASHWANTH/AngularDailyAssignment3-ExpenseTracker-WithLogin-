@@ -1,0 +1,28 @@
+<div class="properties-container">
+  <h2>Select Property</h2>
+  
+  <div class="property-selector">
+    <button 
+      class="property-button" 
+      [class.active]="showAllProperties"
+      (click)="selectAllProperties()">
+      All Properties
+    </button>
+    
+    <button 
+      *ngFor="let property of properties" 
+      class="property-button"
+      [class.active]="isSelected(property)"
+      (click)="selectProperty(property)">
+      {{ property.name }}
+    </button>
+  </div>
+  
+  <div class="selected-info" *ngIf="selectedProperty">
+    <p>Currently viewing: <strong>{{ selectedProperty.name }}</strong></p>
+  </div>
+  
+  <div class="selected-info" *ngIf="showAllProperties">
+    <p>Currently viewing: <strong>All Properties</strong></p>
+  </div>
+</div>

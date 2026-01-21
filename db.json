@@ -1,0 +1,273 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123"
+    }
+  ],
+  "properties": [
+    {
+      "id": 1,
+      "name": "Earthy Escape"
+    },
+    {
+      "id": 2,
+      "name": "Millennium Farm House"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 15000,
+      "date": "2026-01-15",
+      "notes": "Weekend stay - Family booking"
+    },
+    {
+      "id": 2,
+      "propertyId": 1,
+      "type": "income",
+      "category": "Event",
+      "amount": 25000,
+      "date": "2026-01-10",
+      "notes": "Corporate event hosting"
+    },
+    {
+      "id": 3,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Maintenance",
+      "amount": 3500,
+      "date": "2026-01-08",
+      "notes": "Garden maintenance and landscaping"
+    },
+    {
+      "id": 4,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Utilities",
+      "amount": 2200,
+      "date": "2026-01-05",
+      "notes": "Electricity and water bills"
+    },
+    {
+      "id": 5,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Supplies",
+      "amount": 1800,
+      "date": "2026-01-12",
+      "notes": "Cleaning supplies and amenities"
+    },
+    {
+      "id": 6,
+      "propertyId": 2,
+      "type": "income",
+      "category": "Booking",
+      "amount": 18000,
+      "date": "2026-01-14",
+      "notes": "Week-long rental"
+    },
+    {
+      "id": 7,
+      "propertyId": 2,
+      "type": "income",
+      "category": "Rent",
+      "amount": 22000,
+      "date": "2026-01-01",
+      "notes": "Monthly rent payment"
+    },
+    {
+      "id": 8,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Maintenance",
+      "amount": 4500,
+      "date": "2026-01-07",
+      "notes": "Plumbing repairs"
+    },
+    {
+      "id": 9,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Staff",
+      "amount": 8000,
+      "date": "2026-01-02",
+      "notes": "Caretaker salary"
+    },
+    {
+      "id": 10,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Utilities",
+      "amount": 2800,
+      "date": "2026-01-06",
+      "notes": "Electricity, water, and internet"
+    },
+    {
+      "id": 11,
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 12000,
+      "date": "2025-12-28",
+      "notes": "New Year weekend booking"
+    },
+    {
+      "id": 12,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Marketing",
+      "amount": 3000,
+      "date": "2025-12-20",
+      "notes": "Social media advertising"
+    },
+    {
+      "id": 13,
+      "propertyId": 2,
+      "type": "income",
+      "category": "Other Income",
+      "amount": 5000,
+      "date": "2025-12-25",
+      "notes": "Photography session rental"
+    },
+    {
+      "id": 14,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Other Expense",
+      "amount": 1500,
+      "date": "2025-12-22",
+      "notes": "Property insurance premium"
+    },
+    {
+      "id": 15,
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 20000,
+      "date": "2025-11-15",
+      "notes": "Thanksgiving week booking"
+    },
+    {
+      "id": 16,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Maintenance",
+      "amount": 5500,
+      "date": "2025-11-10",
+      "notes": "HVAC system service"
+    },
+    {
+      "id": 17,
+      "propertyId": 2,
+      "type": "income",
+      "category": "Rent",
+      "amount": 22000,
+      "date": "2025-12-01",
+      "notes": "December rent payment"
+    },
+    {
+      "id": 18,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Staff",
+      "amount": 8000,
+      "date": "2025-12-02",
+      "notes": "December caretaker salary"
+    },
+    {
+      "id": 19,
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Supplies",
+      "amount": 2500,
+      "date": "2025-11-25",
+      "notes": "Furniture upgrades and linens"
+    },
+    {
+      "id": 20,
+      "propertyId": 2,
+      "type": "expense",
+      "category": "Utilities",
+      "amount": 2600,
+      "date": "2025-12-05",
+      "notes": "December utilities"
+    },
+    {
+      "id": "985d",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Event",
+      "amount": 50000,
+      "date": "2026-01-20",
+      "notes": ""
+    },
+    {
+      "id": "e323",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Event",
+      "amount": 500000,
+      "date": "2026-01-20",
+      "notes": "new"
+    },
+    {
+      "id": "e869",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 50000,
+      "date": "2026-01-20",
+      "notes": "newww"
+    },
+    {
+      "id": "596b",
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Supplies",
+      "amount": 5000,
+      "date": "2026-01-20",
+      "notes": "n"
+    },
+    {
+      "id": "2f21",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 5000,
+      "date": "2026-01-17",
+      "notes": "newww"
+    },
+    {
+      "id": "baa8",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Booking",
+      "amount": 5000,
+      "date": "2026-01-21",
+      "notes": "naa"
+    },
+    {
+      "id": "d5d5",
+      "propertyId": 1,
+      "type": "income",
+      "category": "Event",
+      "amount": 80000,
+      "date": "2026-01-20",
+      "notes": "neww"
+    },
+    {
+      "id": "b363",
+      "propertyId": 1,
+      "type": "expense",
+      "category": "Utilities",
+      "amount": 8000,
+      "date": "2026-01-20",
+      "notes": "n"
+    }
+  ]
+}
